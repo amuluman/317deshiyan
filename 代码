@@ -1,0 +1,23 @@
+#include <Adafruit_NeoPixel.h> 
+#define PIN 6                         
+Adafruit_NeoPixel strip = Adafruit_NeoPixel(1, PIN, NEO_GRB + NEO_KHZ800);
+#define Control_PIN A0  
+void setup()                                
+ {
+  Serial.begin(115200);               
+  strip.begin();                             
+  strip.show();                             
+ }
+void loop()                                  
+ {            
+  if (analogRead(Control_PIN) > 500)                          
+    colorWipe(strip.Color(255,0,0));
+  else 
+    strip.show();
+    delay(500);
+} 
+void colorWipe(uint32_t c)
+ {
+    strip.setPixelColor(0, c); 
+    strip.show(); 
+ }
